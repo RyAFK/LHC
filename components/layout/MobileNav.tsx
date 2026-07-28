@@ -6,9 +6,11 @@ import { LHCMark } from "@/components/brand/LHCMark";
 import { primaryNav } from "@/lib/site-config";
 import { CallAction } from "@/components/shared/CallAction";
 import { BookingCTA } from "@/components/shared/BookingCTA";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
+  const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     if (!open) return;
@@ -49,47 +51,57 @@ export function MobileNav() {
         )}
       </button>
 
-      {open && (
-        <div
-          id="mobile-nav-panel"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Site menu"
-          className="fixed inset-0 z-50 flex flex-col bg-ink text-bone"
-        >
-          <div className="flex items-center justify-between border-b border-bone/10 px-5 py-4">
-            <LHCMark dark />
-            <button
-              type="button"
-              aria-label="Close menu"
-              onClick={() => setOpen(false)}
-              className="flex min-h-11 min-w-11 items-center justify-center rounded-md focus-visible:outline-2 focus-visible:outline-bone"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M5 5L19 19M19 5L5 19" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-              </svg>
-            </button>
-          </div>
-
-          <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-5 py-6" aria-label="Primary">
-            {primaryNav.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="min-h-11 border-b border-bone/10 py-3 font-display text-lg font-semibold text-bone"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex flex-col gap-3 border-t border-bone/10 px-5 py-5">
-            <BookingCTA source="mobile_nav" variant="on-dark" size="lg" className="w-full" />
-            <CallAction source="mobile_nav" variant="button-on-dark" className="w-full" />
-          </div>
+      {/*
+        Always mounted (not conditionally rendered) so the open/close state
+        change can transition rather than pop instantly. Anchored at the top
+        and revealed via clip-path -- unlike a scale/height transition, this
+        can't distort or reflow the nav links while it plays. `inert` takes
+        the closed panel out of tab order and hit-testing without needing to
+        manually manage every child's tabIndex.
+      */}
+      <div
+        id="mobile-nav-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+        aria-hidden={!open}
+        inert={!open}
+        className={`fixed inset-0 z-50 flex flex-col bg-ink text-bone ${
+          reducedMotion ? "" : "transition-[clip-path] duration-500 ease-[cubic-bezier(.22,1,.36,1)]"
+        } ${open ? "[clip-path:inset(0_0_0%_0)]" : "[clip-path:inset(0_0_100%_0)]"}`}
+      >
+        <div className="flex items-center justify-between border-b border-bone/10 px-5 py-4">
+          <LHCMark dark />
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setOpen(false)}
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-md focus-visible:outline-2 focus-visible:outline-bone"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 5L19 19M19 5L5 19" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+            </svg>
+          </button>
         </div>
-      )}
+
+        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-5 py-6" aria-label="Primary">
+          {primaryNav.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="min-h-11 border-b border-bone/10 py-3 font-display text-lg font-semibold text-bone"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex flex-col gap-3 border-t border-bone/10 px-5 py-5">
+          <BookingCTA source="mobile_nav" variant="on-dark" size="lg" className="w-full" />
+          <CallAction source="mobile_nav" variant="button-on-dark" className="w-full" />
+        </div>
+      </div>
     </div>
   );
 }
