@@ -38,7 +38,11 @@ export function SpecialistProfile({ specialist }: { specialist: Specialist }) {
 
           <Reveal scale className="mt-4">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
-              <SpecialistAvatar name={specialist.name} className="aspect-square w-28 shrink-0 border border-ink/10" />
+              <SpecialistAvatar
+                name={specialist.name}
+                photo={specialist.photo}
+                className="aspect-square w-28 shrink-0 border border-ink/10"
+              />
               <div>
                 <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
                   {displayName}
@@ -59,7 +63,20 @@ export function SpecialistProfile({ specialist }: { specialist: Specialist }) {
       <Container className="max-w-4xl py-12">
         <div className="grid gap-12 lg:grid-cols-[2fr_1fr]">
           <div>
-            <Reveal>
+            {specialist.bio && (
+              <Reveal>
+                <section>
+                  <h2 className="font-display text-lg font-semibold text-ink">Biography</h2>
+                  <div className="prose-measure mt-3 space-y-3 text-sm leading-6 text-ink/75">
+                    {specialist.bio.split("\n\n").map((paragraph, i) => (
+                      <p key={i}>{paragraph}</p>
+                    ))}
+                  </div>
+                </section>
+              </Reveal>
+            )}
+
+            <Reveal className={specialist.bio ? "mt-10" : ""}>
               <section>
                 <h2 className="font-display text-lg font-semibold text-ink">
                   Specialist interests

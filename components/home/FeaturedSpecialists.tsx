@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { specialists } from "@/lib/content/specialists";
 import { symptoms } from "@/lib/content/symptoms";
 import { conditions } from "@/lib/content/conditions";
@@ -12,7 +13,12 @@ import { Reveal } from "@/components/ui/Reveal";
 
 const ANY = "any";
 
-export function FeaturedSpecialists() {
+type FeaturedSpecialistsProps = {
+  /** Caps how many cards render (e.g. for a homepage teaser). Omit for the full directory. */
+  limit?: number;
+};
+
+export function FeaturedSpecialists({ limit }: FeaturedSpecialistsProps = {}) {
   const [symptomFilter, setSymptomFilter] = useState(ANY);
   const [conditionFilter, setConditionFilter] = useState(ANY);
   const [subspecialtyFilter, setSubspecialtyFilter] = useState(ANY);
@@ -44,6 +50,8 @@ export function FeaturedSpecialists() {
       return true;
     });
   }, [symptomFilter, conditionFilter, subspecialtyFilter, testFilter, nhsOnly]);
+
+  const visible = limit ? filtered.slice(0, limit) : filtered;
 
   return (
     <section className="bg-bone-dim py-20 sm:py-28">
@@ -93,11 +101,11 @@ export function FeaturedSpecialists() {
         </div>
 
         <p className="mono-label mt-6 text-xs text-ink/40">
-          {filtered.length} of {specialists.length} specialists shown
+          {visible.length} of {specialists.length} specialists shown
         </p>
 
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((specialist, i) => (
+          {visible.map((specialist, i) => (
             <Reveal key={specialist.slug} delayMs={Math.min(i, 5) * 100}>
               <SpecialistCard specialist={specialist} />
             </Reveal>
@@ -108,6 +116,17 @@ export function FeaturedSpecialists() {
             </p>
           )}
         </div>
+
+        {limit && filtered.length > limit && (
+          <div className="mt-8">
+            <Link
+              href="/specialists"
+              className="text-sm font-semibold text-teal underline underline-offset-4"
+            >
+              View all {specialists.length} specialists
+            </Link>
+          </div>
+        )}
       </Container>
     </section>
   );

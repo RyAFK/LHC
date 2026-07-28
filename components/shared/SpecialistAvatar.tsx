@@ -1,21 +1,45 @@
+import Image from "next/image";
+
 function initialsOf(name: string): string {
   return name
     .replace(" [VERIFY]", "")
     .split(" ")
-    .filter((word) => word !== "Dr")
+    .filter((word) => word !== "Dr" && word !== "Mr" && word !== "Professor")
     .slice(0, 2)
     .map((word) => word[0])
     .join("");
 }
 
+type SpecialistAvatarProps = {
+  name: string;
+  /** Path under /public to a real headshot. Falls back to the abstract placeholder when omitted. */
+  photo?: string;
+  className?: string;
+};
+
 /**
- * A designed placeholder for a specialist headshot: an abstract bust mark on
- * a calibration-ring backdrop (echoing the hero's ECG/scan-line motif),
- * with an initials badge. Stands in until real consultant photography is
- * supplied — see the [VERIFY] checklist.
+ * A specialist headshot: a real consultant photo when one has been supplied,
+ * otherwise a designed placeholder — an abstract bust mark on a
+ * calibration-ring backdrop (echoing the hero's ECG/scan-line motif) with an
+ * initials badge. See the [VERIFY] checklist for which profiles still need
+ * real photography.
  */
-export function SpecialistAvatar({ name, className = "" }: { name: string; className?: string }) {
+export function SpecialistAvatar({ name, photo, className = "" }: SpecialistAvatarProps) {
   const initials = initialsOf(name);
+
+  if (photo) {
+    return (
+      <div className={`relative overflow-hidden bg-ink-raised ${className}`}>
+        <Image
+          src={photo}
+          alt={`Photo of ${name.replace(" [VERIFY]", "")}`}
+          fill
+          sizes="(min-width: 1024px) 400px, 50vw"
+          className="object-cover"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={`relative flex items-center justify-center overflow-hidden bg-ink-raised ${className}`}>

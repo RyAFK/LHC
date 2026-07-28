@@ -1,8 +1,9 @@
 import type { TrustStat } from "@/lib/content/types";
+import { specialists } from "@/lib/content/specialists";
 
-// Confirm before launch: every value below is provisional. None should be
-// hard-coded into more than this single source of truth — components must
-// import from here rather than restating figures inline.
+// Confirm before launch: most values below are still provisional. None
+// should be hard-coded into more than this single source of truth —
+// components must import from here rather than restating figures inline.
 export const trustStats: TrustStat[] = [
   {
     label: "Established",
@@ -18,9 +19,11 @@ export const trustStats: TrustStat[] = [
   },
   {
     label: "Specialists",
-    value: "19 specialist profiles currently listed",
-    monoCode: "×19",
-    status: "confirm_before_launch",
+    // Derived from the specialist directory itself, so this figure can't
+    // drift out of sync with what's actually listed.
+    value: `${specialists.length} specialist profiles currently listed`,
+    monoCode: `×${specialists.length}`,
+    status: "verified",
   },
   {
     label: "Insurance",

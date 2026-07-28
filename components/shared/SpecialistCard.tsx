@@ -8,7 +8,11 @@ import { SpecialistAvatar } from "@/components/shared/SpecialistAvatar";
 export function SpecialistCard({ specialist }: { specialist: Specialist }) {
   return (
     <div className="flex flex-col border border-ink/10 bg-bone">
-      <SpecialistAvatar name={specialist.name} className="aspect-[4/3] border-b border-ink/10" />
+      <SpecialistAvatar
+        name={specialist.name}
+        photo={specialist.photo}
+        className="aspect-[4/3] border-b border-ink/10"
+      />
 
       <div className="flex flex-1 flex-col p-6">
         {specialist.profileStatus === "sample" && (

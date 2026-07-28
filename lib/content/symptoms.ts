@@ -29,7 +29,7 @@ export const symptoms: Symptom[] = [
       "exercise-stress-test",
     ],
     relevantConditions: ["coronary-artery-disease", "valvular-heart-disease"],
-    relevantSpecialists: ["naomi-ellery", "julian-ferris"],
+    relevantSpecialists: ["antonis-pavlidis", "michael-michail", "anantharaman-ramasamy"],
     faqs: [
       {
         question: "Does chest pain always mean a heart problem?",
@@ -61,7 +61,7 @@ export const symptoms: Symptom[] = [
       "Your consultant can arrange an ECG and, where appropriate, a period of ambulatory heart monitoring to try to capture what your heart rhythm is doing when symptoms occur.",
     possibleAssessments: ["electrocardiogram", "heart-monitor"],
     relevantConditions: ["atrial-fibrillation", "cardiomyopathy"],
-    relevantSpecialists: ["rajan-kapoor", "naomi-ellery"],
+    relevantSpecialists: ["antonio-creta", "rui-providencia", "syed-ahsan"],
     faqs: [
       {
         question: "Are palpitations usually serious?",
@@ -97,7 +97,7 @@ export const symptoms: Symptom[] = [
       "exercise-stress-test",
     ],
     relevantConditions: ["heart-failure", "valvular-heart-disease", "cardiomyopathy"],
-    relevantSpecialists: ["helena-voss", "julian-ferris"],
+    relevantSpecialists: ["filip-zemrak", "martin-thomas", "robin-chung"],
     faqs: [
       {
         question: "How is heart-related breathlessness told apart from other causes?",
@@ -128,7 +128,7 @@ export const symptoms: Symptom[] = [
       "blood-pressure-monitoring",
     ],
     relevantConditions: ["atrial-fibrillation", "cardiomyopathy"],
-    relevantSpecialists: ["rajan-kapoor", "sarah-okonkwo"],
+    relevantSpecialists: ["nikolaos-papageorgiou", "anantharaman-ramasamy", "syed-ahsan"],
     faqs: [
       {
         question: "Should I see a cardiologist for a single fainting episode?",
@@ -154,7 +154,7 @@ export const symptoms: Symptom[] = [
       "Your consultant can arrange accurate, ambulatory blood pressure monitoring and assess your broader cardiovascular risk to guide any treatment decisions.",
     possibleAssessments: ["blood-pressure-monitoring", "heart-screening"],
     relevantConditions: ["hypertension"],
-    relevantSpecialists: ["marcus-whitfield"],
+    relevantSpecialists: ["martin-thomas", "filip-zemrak", "ankur-gulati"],
     faqs: [
       {
         question: "Why might a single clinic reading not be enough?",
@@ -180,7 +180,7 @@ export const symptoms: Symptom[] = [
       "A consultant can review your family history in detail and recommend a tailored heart screening pathway, which may include ECG, echocardiogram or other tests depending on the specific history.",
     possibleAssessments: ["heart-screening", "electrocardiogram", "echocardiogram"],
     relevantConditions: ["cardiomyopathy", "coronary-artery-disease"],
-    relevantSpecialists: ["julian-ferris", "marcus-whitfield"],
+    relevantSpecialists: ["emmanuel-androulakis", "konstantinos-savvatis"],
     faqs: [
       {
         question: "What counts as a significant family history?",

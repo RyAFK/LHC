@@ -26,7 +26,7 @@ export default function HomePage() {
       <RouteSelector />
       <SymptomsNavigator />
       <PatientPathway />
-      <FeaturedSpecialists />
+      <FeaturedSpecialists limit={6} />
       <DiagnosticsPricing />
       <PatientExperienceInsurers />
       <HeritageSection />

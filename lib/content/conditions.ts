@@ -30,7 +30,7 @@ export const conditions: Condition[] = [
       "exercise-stress-test",
       "heart-screening",
     ],
-    relevantSpecialists: ["naomi-ellery", "julian-ferris"],
+    relevantSpecialists: ["antonis-pavlidis", "anantharaman-ramasamy", "ankur-gulati"],
     review: pendingReview([
       { label: "NHS — Coronary heart disease", href: "https://www.nhs.uk/conditions/coronary-heart-disease/" },
     ]),
@@ -52,7 +52,7 @@ export const conditions: Condition[] = [
     treatmentOverview:
       "Management may include medication to control heart rate or rhythm, and an assessment of stroke risk. Some patients are suitable for procedural treatment, discussed individually.",
     relevantTests: ["electrocardiogram", "heart-monitor"],
-    relevantSpecialists: ["rajan-kapoor", "naomi-ellery"],
+    relevantSpecialists: ["antonio-creta", "rui-providencia", "syed-ahsan"],
     review: pendingReview([
       { label: "NHS — Atrial fibrillation", href: "https://www.nhs.uk/conditions/atrial-fibrillation/" },
     ]),
@@ -74,7 +74,7 @@ export const conditions: Condition[] = [
     treatmentOverview:
       "Treatment usually combines medication, lifestyle guidance and regular monitoring, with the aim of controlling symptoms and protecting the heart over the long term.",
     relevantTests: ["echocardiogram", "cardiopulmonary-exercise-test"],
-    relevantSpecialists: ["helena-voss"],
+    relevantSpecialists: ["filip-zemrak", "martin-thomas", "ankur-gulati"],
     review: pendingReview([
       { label: "NHS — Heart failure", href: "https://www.nhs.uk/conditions/heart-failure/" },
     ]),
@@ -95,7 +95,7 @@ export const conditions: Condition[] = [
     treatmentOverview:
       "Management typically combines lifestyle measures with medication where needed, tailored to your individual risk and response to treatment.",
     relevantTests: ["blood-pressure-monitoring", "heart-screening"],
-    relevantSpecialists: ["marcus-whitfield"],
+    relevantSpecialists: ["martin-thomas", "ankur-gulati", "filip-zemrak"],
     review: pendingReview([
       { label: "NHS — High blood pressure", href: "https://www.nhs.uk/conditions/high-blood-pressure-hypertension/" },
     ]),
@@ -117,7 +117,7 @@ export const conditions: Condition[] = [
     treatmentOverview:
       "Some valve conditions are simply monitored over time, while others may eventually need a procedure. Your consultant will explain what is appropriate for your situation.",
     relevantTests: ["echocardiogram"],
-    relevantSpecialists: ["sarah-okonkwo", "helena-voss"],
+    relevantSpecialists: ["john-yap", "sveeta-badiani", "suneil-aggarwal"],
     review: pendingReview([
       { label: "NHS — Heart valve disease", href: "https://www.nhs.uk/conditions/heart-valve-disease/" },
     ]),
@@ -139,7 +139,7 @@ export const conditions: Condition[] = [
     treatmentOverview:
       "Management depends on the type and severity, and may include medication, monitoring, lifestyle guidance and, where relevant, family screening.",
     relevantTests: ["echocardiogram", "cardiopulmonary-exercise-test"],
-    relevantSpecialists: ["helena-voss", "julian-ferris"],
+    relevantSpecialists: ["konstantinos-savvatis", "emmanuel-androulakis", "ankur-gulati"],
     review: pendingReview([
       { label: "NHS — Cardiomyopathy", href: "https://www.nhs.uk/conditions/cardiomyopathy/" },
     ]),

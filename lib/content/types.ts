@@ -84,13 +84,20 @@ export type Specialist = {
   slug: string;
   /**
    * "sample" profiles use placeholder names and biographical details to
-   * demonstrate the page template. They must be replaced with real,
-   * consultant-approved profiles before launch — see the [VERIFY] checklist.
+   * demonstrate the page template and must be replaced before launch.
+   * "verified" profiles use the consultant's real name, photo and bio as
+   * published on londonheartcentre.com — but their `conditionsTreated`,
+   * `testsPerformed` and `patientConcerns` tags are this project's own
+   * mapping of that bio onto our fixed condition/test taxonomy, not a
+   * verbatim quote, and `nhsAppointment`/`availability` are inferred from
+   * bio text — all still worth an LHC review pass before launch.
    */
   profileStatus: "sample" | "verified";
   name: string;
-  credentials: string; // e.g. "MA, MD, FRCP"
+  credentials: string; // e.g. "MA, MD, FRCP" — empty string if not stated on their profile
   mainSpecialty: string;
+  /** Full biography, sourced (for "verified" profiles) from the consultant's own published profile. */
+  bio?: string;
   specialistInterests: string[];
   patientConcerns: string[]; // 2-3 shown on card
   nhsAppointment: boolean; // [VERIFY] per consultant
@@ -101,7 +108,8 @@ export type Specialist = {
   languages: string[];
   availability: SpecialistAvailability;
   reviews: PatientReview[];
-  imagePlaceholder: string; // path to placeholder headshot asset
+  imagePlaceholder: string; // path to placeholder headshot asset, used when `photo` is absent
+  photo?: string; // path under /public to a real headshot, e.g. "/media/specialists/slug.webp"
 };
 
 export type TrustStat = {

@@ -22,7 +22,7 @@ export const tests: DiagnosticTest[] = [
     price: { kind: "confirmed_after_assessment" },
     relevantSymptoms: ["chest-pain", "palpitations", "dizziness-blackouts"],
     relevantConditions: ["coronary-artery-disease", "atrial-fibrillation"],
-    relevantSpecialists: ["naomi-ellery", "rajan-kapoor", "sarah-okonkwo"],
+    relevantSpecialists: ["syed-ahsan", "antonio-creta", "filip-zemrak"],
   },
   {
     slug: "echocardiogram",
@@ -44,7 +44,7 @@ export const tests: DiagnosticTest[] = [
       "valvular-heart-disease",
       "cardiomyopathy",
     ],
-    relevantSpecialists: ["helena-voss", "sarah-okonkwo", "naomi-ellery"],
+    relevantSpecialists: ["sveeta-badiani", "robin-chung", "konstantinos-savvatis"],
   },
   {
     slug: "heart-monitor",
@@ -63,7 +63,7 @@ export const tests: DiagnosticTest[] = [
     price: { kind: "confirmed_after_assessment" },
     relevantSymptoms: ["palpitations", "dizziness-blackouts"],
     relevantConditions: ["atrial-fibrillation"],
-    relevantSpecialists: ["rajan-kapoor", "naomi-ellery"],
+    relevantSpecialists: ["antonio-creta", "rui-providencia", "syed-ahsan"],
   },
   {
     slug: "exercise-stress-test",
@@ -82,7 +82,7 @@ export const tests: DiagnosticTest[] = [
     price: { kind: "confirmed_after_assessment" },
     relevantSymptoms: ["chest-pain", "breathlessness"],
     relevantConditions: ["coronary-artery-disease"],
-    relevantSpecialists: ["julian-ferris", "naomi-ellery"],
+    relevantSpecialists: ["antonis-pavlidis", "emmanuel-androulakis"],
   },
   {
     slug: "cardiopulmonary-exercise-test",
@@ -101,7 +101,7 @@ export const tests: DiagnosticTest[] = [
     price: { kind: "confirmed_after_assessment" },
     relevantSymptoms: ["breathlessness"],
     relevantConditions: ["heart-failure", "cardiomyopathy"],
-    relevantSpecialists: ["julian-ferris", "helena-voss"],
+    relevantSpecialists: ["sveeta-badiani"],
   },
   {
     slug: "blood-pressure-monitoring",
@@ -119,7 +119,7 @@ export const tests: DiagnosticTest[] = [
     price: { kind: "confirmed_after_assessment" },
     relevantSymptoms: ["high-blood-pressure", "dizziness-blackouts"],
     relevantConditions: ["hypertension"],
-    relevantSpecialists: ["marcus-whitfield"],
+    relevantSpecialists: ["martin-thomas", "ankur-gulati", "filip-zemrak"],
   },
   {
     slug: "heart-screening",
@@ -137,7 +137,7 @@ export const tests: DiagnosticTest[] = [
     price: { kind: "confirmed_after_assessment" },
     relevantSymptoms: ["family-history", "high-blood-pressure"],
     relevantConditions: ["coronary-artery-disease", "hypertension"],
-    relevantSpecialists: ["julian-ferris", "marcus-whitfield", "sarah-okonkwo"],
+    relevantSpecialists: ["anantharaman-ramasamy", "emmanuel-androulakis"],
   },
 ];
 

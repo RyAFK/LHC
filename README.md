@@ -330,14 +330,22 @@ or a `confirm_before_launch` status field, collected here for convenience.
 Heart Centre.**
 
 - [ ] **Trust rail figures** (`lib/content/trust.ts`): established year
-      (1978), Doctify rating (4.93/207), specialist count (19), insurer
-      acceptance, location — all currently marked `confirm_before_launch`.
-- [ ] **Specialist profiles** (`lib/content/specialists.ts`): all six
-      profiles are placeholder/sample data (`profileStatus: "sample"`) —
-      names, credentials, training, publications and availability are
-      illustrative only. Replace with real, consultant-approved profiles
-      (and increase/decrease the count to match reality) before launch. Real
-      headshots are needed — current cards render initials placeholders.
+      (1978), Doctify rating (4.93/207), insurer acceptance, location — still
+      marked `confirm_before_launch`. The specialist count is now `verified`
+      (it's derived from `specialists.length`, so it can't drift out of sync
+      with the actual directory).
+- [x] **Specialist profiles** (`lib/content/specialists.ts`): replaced with
+      18 real consultants — names, credentials, photos and full biographies
+      sourced directly from londonheartcentre.com/pages/our-team
+      (`profileStatus: "verified"`). Still worth an LHC review pass before
+      launch: `conditionsTreated`/`testsPerformed`/`patientConcerns` are this
+      project's own mapping of each bio onto our fixed taxonomy (not a
+      verbatim claim), and `nhsAppointment`/`availability` are inferred from
+      bio text rather than confirmed directly. The source page also lists a
+      19th person, Dr Siva Sundar, whose bio describes a GP/executive-health
+      concierge role rather than a cardiology consultancy — he's been left
+      out of this cardiology-specific directory; confirm with LHC whether he
+      should appear elsewhere on the site instead.
 - [ ] **Patient reviews** (`lib/content/reviews.ts`): intentionally empty.
       No Doctify excerpts were supplied, so none were invented. Populate with
       real, permissioned excerpts, or the site will keep showing the honest
@@ -412,3 +420,17 @@ Heart Centre.**
   check in the final QA pass), and every test's price is either a real
   `£X` or the literal string "Price confirmed after assessment" — the
   `PriceSummary` component has no code path that can render `£0`.
+- **How the real specialist data got in**: this session couldn't fetch
+  `londonheartcentre.com` directly (`WebFetch` was blocked for every URL
+  tried in this session, including neutral test pages — a session-level
+  restriction, not that site's bot protection), so the team page was saved
+  client-side as a `.mht` (MHTML) archive and attached. MHTML is just a MIME
+  multipart message, so Python's standard-library `email` module parses it
+  directly — no scraping library needed. That yielded the original page HTML
+  plus every embedded image as raw bytes. The images were served as
+  WebP/AVIF despite `.jpg`/`.png` URLs (content negotiation), so `ffmpeg`
+  (already present in this environment) re-encoded all 18 headshots to a
+  consistent 640px-wide WebP. Bios were extracted from the repeating
+  `multicolumn-card` HTML structure with a small regex parser — no bio text
+  was rewritten, only lightly re-flowed from `<br><br>`-separated HTML into
+  paragraphs.
