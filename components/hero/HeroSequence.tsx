@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useHeroFrameLoader } from "@/hooks/useHeroFrameLoader";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { drawCover, sizeCanvasForDpr } from "@/lib/hero/canvasEngine";
 import {
   SMOOTHING_FACTOR,
@@ -14,22 +15,6 @@ import { HeroChapterStack } from "@/components/hero/HeroChapterStack";
 import { ChapterCalibrationRail } from "@/components/hero/ChapterCalibrationRail";
 import { BookingCTA } from "@/components/shared/BookingCTA";
 
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-function subscribeToReducedMotion(callback: () => void) {
-  const mql = window.matchMedia(REDUCED_MOTION_QUERY);
-  mql.addEventListener("change", callback);
-  return () => mql.removeEventListener("change", callback);
-}
-
-function getReducedMotionSnapshot() {
-  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
-}
-
-function getReducedMotionServerSnapshot() {
-  return false;
-}
-
 /**
  * The 320vh (220vh mobile) sticky scroll-scrubbed hero sequence. Defaults to
  * the static chapter stack (matching SSR output) and only switches into the
@@ -37,11 +22,7 @@ function getReducedMotionServerSnapshot() {
  * frame has loaded successfully. See README for current asset status.
  */
 export function HeroSequence() {
-  const reducedMotion = useSyncExternalStore(
-    subscribeToReducedMotion,
-    getReducedMotionSnapshot,
-    getReducedMotionServerSnapshot
-  );
+  const reducedMotion = usePrefersReducedMotion();
 
   const { framesRef, criticalSettled, hasAnyFrame } = useHeroFrameLoader(!reducedMotion);
   const mode = !reducedMotion && criticalSettled && hasAnyFrame ? "animated" : "static";

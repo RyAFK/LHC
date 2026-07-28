@@ -8,6 +8,7 @@ import { tests } from "@/lib/content/tests";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SpecialistCard } from "@/components/shared/SpecialistCard";
+import { Reveal } from "@/components/ui/Reveal";
 
 const ANY = "any";
 
@@ -47,11 +48,13 @@ export function FeaturedSpecialists() {
   return (
     <section className="bg-bone-dim py-20 sm:py-28">
       <Container>
-        <SectionHeading
-          eyebrow="Specialists"
-          title="Featured specialists"
-          lede="Filter by symptom, condition, subspecialty or diagnostic expertise to find the right consultant."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="Specialists"
+            title="Featured specialists"
+            lede="Filter by symptom, condition, subspecialty or diagnostic expertise to find the right consultant."
+          />
+        </Reveal>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           <FilterSelect
@@ -94,8 +97,10 @@ export function FeaturedSpecialists() {
         </p>
 
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((specialist) => (
-            <SpecialistCard key={specialist.slug} specialist={specialist} />
+          {filtered.map((specialist, i) => (
+            <Reveal key={specialist.slug} delayMs={Math.min(i, 5) * 70}>
+              <SpecialistCard specialist={specialist} />
+            </Reveal>
           ))}
           {filtered.length === 0 && (
             <p className="col-span-full text-sm text-ink/60">

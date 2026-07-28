@@ -5,6 +5,7 @@ import { FAQAccordion } from "@/components/shared/FAQAccordion";
 import { ClinicLocation } from "@/components/shared/ClinicLocation";
 import { BookingCTA } from "@/components/shared/BookingCTA";
 import { CallAction } from "@/components/shared/CallAction";
+import { Reveal } from "@/components/ui/Reveal";
 
 /** Section 10: FAQs, location and a final, unambiguous booking action. */
 export function FaqLocationCta() {
@@ -12,7 +13,9 @@ export function FaqLocationCta() {
     <>
       <section className="py-20 sm:py-28">
         <Container className="max-w-3xl">
-          <SectionHeading eyebrow="Questions" title="Frequently asked questions" />
+          <Reveal>
+            <SectionHeading eyebrow="Questions" title="Frequently asked questions" />
+          </Reveal>
           <div className="mt-8">
             <FAQAccordion faqs={generalFaqs} />
           </div>
@@ -21,10 +24,12 @@ export function FaqLocationCta() {
 
       <section className="bg-bone-dim py-20 sm:py-28">
         <Container>
-          <SectionHeading eyebrow="Visit us" title="Find London Heart Centre" />
-          <div className="mt-10">
+          <Reveal>
+            <SectionHeading eyebrow="Visit us" title="Find London Heart Centre" />
+          </Reveal>
+          <Reveal delayMs={100} className="mt-10">
             <ClinicLocation />
-          </div>
+          </Reveal>
         </Container>
       </section>
 

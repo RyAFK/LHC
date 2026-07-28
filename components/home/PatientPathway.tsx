@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 import { PhoneCallIcon, StethoscopeIcon, FileTextIcon } from "@/components/icons/Icons";
 
 const steps = [
@@ -28,29 +29,33 @@ export function PatientPathway() {
   return (
     <section className="py-20 sm:py-28">
       <Container>
-        <SectionHeading
-          eyebrow="What to expect"
-          title="A clear, connected pathway"
-          lede="Every patient follows the same considered process, from first contact to a plan you understand."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="What to expect"
+            title="A clear, connected pathway"
+            lede="Every patient follows the same considered process, from first contact to a plan you understand."
+          />
+        </Reveal>
 
         <ol className="relative mt-14 grid gap-10 sm:grid-cols-3">
           <div
             aria-hidden="true"
             className="absolute top-[26px] left-0 right-0 hidden h-px bg-bronze/25 sm:block"
           />
-          {steps.map((s) => (
+          {steps.map((s, i) => (
             <li key={s.step} className="relative">
-              <span className="relative z-10 flex h-[52px] w-[52px] items-center justify-center border-2 border-bronze bg-bone text-oxblood">
-                <s.Icon className="h-6 w-6" />
-              </span>
-              <span className="mono-label mt-4 block text-xs text-ink/40">{s.step}</span>
-              <h3 className="mt-2 font-display text-xl font-semibold text-ink">
-                {s.title}
-              </h3>
-              <p className="prose-measure mt-3 text-sm leading-6 text-ink/65">
-                {s.body}
-              </p>
+              <Reveal delayMs={i * 120}>
+                <span className="relative z-10 flex h-[52px] w-[52px] items-center justify-center border-2 border-bronze bg-bone text-oxblood">
+                  <s.Icon className="h-6 w-6" />
+                </span>
+                <span className="mono-label mt-4 block text-xs text-ink/40">{s.step}</span>
+                <h3 className="mt-2 font-display text-xl font-semibold text-ink">
+                  {s.title}
+                </h3>
+                <p className="prose-measure mt-3 text-sm leading-6 text-ink/65">
+                  {s.body}
+                </p>
+              </Reveal>
             </li>
           ))}
         </ol>

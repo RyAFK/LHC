@@ -4,6 +4,7 @@ import Link from "next/link";
 import { track } from "@/lib/analytics";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 import {
   HeartPulseIcon,
   StethoscopeIcon,
@@ -48,36 +49,39 @@ export function RouteSelector() {
   return (
     <section id="where-should-i-start" className="py-20 sm:py-28">
       <Container>
-        <SectionHeading
-          eyebrow="Start here"
-          title="Where should I start?"
-          lede="Choose the route that matches where you are today. This helps you find the right information — it does not diagnose or triage your symptoms."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="Start here"
+            title="Where should I start?"
+            lede="Choose the route that matches where you are today. This helps you find the right information — it does not diagnose or triage your symptoms."
+          />
+        </Reveal>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
-          {routes.map((route) => (
-            <Link
-              key={route.id}
-              href={route.href}
-              onClick={() => track({ name: "route_select", route: route.id })}
-              className="group flex flex-col justify-between border border-ink/10 bg-bone px-6 py-6 transition-colors hover:border-teal/40 hover:bg-teal/5"
-            >
-              <div>
-                <span className="flex h-11 w-11 items-center justify-center border border-bronze/30 bg-bronze/10 text-oxblood transition-colors group-hover:border-teal/40 group-hover:bg-teal/10 group-hover:text-teal">
-                  <route.Icon className="h-5 w-5" />
+          {routes.map((route, i) => (
+            <Reveal key={route.id} delayMs={i * 80}>
+              <Link
+                href={route.href}
+                onClick={() => track({ name: "route_select", route: route.id })}
+                className="group flex h-full flex-col justify-between border border-ink/10 bg-bone px-6 py-6 transition-colors hover:border-teal/40 hover:bg-teal/5"
+              >
+                <div>
+                  <span className="flex h-11 w-11 items-center justify-center border border-bronze/30 bg-bronze/10 text-oxblood transition-colors group-hover:border-teal/40 group-hover:bg-teal/10 group-hover:text-teal">
+                    <route.Icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-4 font-display text-lg font-semibold text-ink">
+                    {route.label}
+                  </h3>
+                  <p className="prose-measure mt-2 text-sm leading-6 text-ink/65">
+                    {route.description}
+                  </p>
+                </div>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-teal">
+                  Continue
+                  <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
-                <h3 className="mt-4 font-display text-lg font-semibold text-ink">
-                  {route.label}
-                </h3>
-                <p className="prose-measure mt-2 text-sm leading-6 text-ink/65">
-                  {route.description}
-                </p>
-              </div>
-              <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-teal">
-                Continue
-                <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </Link>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </Container>
