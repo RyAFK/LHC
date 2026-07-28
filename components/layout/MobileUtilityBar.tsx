@@ -3,6 +3,7 @@
 import { track } from "@/lib/analytics";
 import Link from "next/link";
 import { siteConfig } from "@/lib/site-config";
+import { PhoneCallIcon } from "@/components/icons/Icons";
 
 /** Persistent bottom utility bar for mobile: always-visible Book and Call actions. */
 export function MobileUtilityBar() {
@@ -16,7 +17,7 @@ export function MobileUtilityBar() {
         onClick={() => track({ name: "cta_call_click", source: "mobile_utility_bar" })}
         className="flex min-h-14 flex-1 items-center justify-center gap-2 border-r border-ink/10 font-display text-sm font-semibold text-ink"
       >
-        <span aria-hidden="true">☎</span>
+        <PhoneCallIcon className="h-4 w-4" />
         Call
       </a>
       <Link

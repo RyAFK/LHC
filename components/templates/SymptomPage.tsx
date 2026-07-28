@@ -10,11 +10,14 @@ import { SpecialistCard } from "@/components/shared/SpecialistCard";
 import { FAQAccordion } from "@/components/shared/FAQAccordion";
 import { ClinicalReviewFooter } from "@/components/shared/ClinicalReviewFooter";
 import { BookingCTA } from "@/components/shared/BookingCTA";
+import { symptomIcons } from "@/components/home/symptomIcons";
+import { ActivityIcon } from "@/components/icons/Icons";
 
 export function SymptomPage({ symptom }: { symptom: Symptom }) {
   const tests = allTests.filter((t) => symptom.possibleAssessments.includes(t.slug));
   const conditions = allConditions.filter((c) => symptom.relevantConditions.includes(c.slug));
   const specialists = allSpecialists.filter((s) => symptom.relevantSpecialists.includes(s.slug));
+  const SymptomIcon = symptomIcons[symptom.slug] ?? ActivityIcon;
 
   return (
     <article>
@@ -27,6 +30,9 @@ export function SymptomPage({ symptom }: { symptom: Symptom }) {
               { name: symptom.name, path: `/symptoms/${symptom.slug}` },
             ]}
           />
+          <span className="mt-4 flex h-12 w-12 items-center justify-center border border-teal/25 bg-teal/8 text-teal">
+            <SymptomIcon className="h-6 w-6" />
+          </span>
           <h1 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
             {symptom.name}
           </h1>

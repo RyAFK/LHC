@@ -4,11 +4,18 @@ import Link from "next/link";
 import { track } from "@/lib/analytics";
 import type { DiagnosticTest } from "@/lib/content/types";
 import { PriceSummary } from "@/components/shared/PriceSummary";
+import { testIcons } from "@/components/home/testIcons";
+import { ActivityIcon } from "@/components/icons/Icons";
 
 export function TestCard({ test }: { test: DiagnosticTest }) {
+  const TestIcon = testIcons[test.slug] ?? ActivityIcon;
+
   return (
     <article className="flex flex-col border border-ink/10 bg-bone p-6">
-      <h3 className="font-display text-lg font-semibold text-ink">{test.name}</h3>
+      <span className="flex h-11 w-11 items-center justify-center border border-teal/25 bg-teal/8 text-teal">
+        <TestIcon className="h-5 w-5" />
+      </span>
+      <h3 className="mt-4 font-display text-lg font-semibold text-ink">{test.name}</h3>
       <p className="prose-measure mt-2 text-sm leading-6 text-ink/65">
         {test.clinicalPurpose}
       </p>

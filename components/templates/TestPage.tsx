@@ -9,6 +9,8 @@ import { SpecialistCard } from "@/components/shared/SpecialistCard";
 import { PriceSummary } from "@/components/shared/PriceSummary";
 import { BookingCTA } from "@/components/shared/BookingCTA";
 import { ViewTracker } from "@/components/shared/ViewTracker";
+import { testIcons } from "@/components/home/testIcons";
+import { ActivityIcon } from "@/components/icons/Icons";
 
 const facts: { label: string; key: keyof DiagnosticTest }[] = [
   { label: "Approximate duration", key: "approximateDuration" },
@@ -20,6 +22,7 @@ export function TestPage({ test }: { test: DiagnosticTest }) {
   const symptoms = allSymptoms.filter((s) => test.relevantSymptoms.includes(s.slug));
   const conditions = allConditions.filter((c) => test.relevantConditions.includes(c.slug));
   const specialists = allSpecialists.filter((s) => test.relevantSpecialists.includes(s.slug));
+  const TestIcon = testIcons[test.slug] ?? ActivityIcon;
 
   return (
     <article>
@@ -34,6 +37,9 @@ export function TestPage({ test }: { test: DiagnosticTest }) {
               { name: test.name, path: `/tests/${test.slug}` },
             ]}
           />
+          <span className="mt-4 flex h-12 w-12 items-center justify-center border border-teal/25 bg-teal/8 text-teal">
+            <TestIcon className="h-6 w-6" />
+          </span>
           <h1 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
             {test.name}
           </h1>

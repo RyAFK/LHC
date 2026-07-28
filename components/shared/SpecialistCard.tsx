@@ -3,13 +3,12 @@
 import Link from "next/link";
 import { track } from "@/lib/analytics";
 import type { Specialist } from "@/lib/content/types";
+import { SpecialistAvatar } from "@/components/shared/SpecialistAvatar";
 
 export function SpecialistCard({ specialist }: { specialist: Specialist }) {
   return (
     <div className="flex flex-col border border-ink/10 bg-bone">
-      <div className="flex aspect-[4/3] items-center justify-center border-b border-ink/10 bg-ink-raised">
-        <PlaceholderHeadshot name={specialist.name} />
-      </div>
+      <SpecialistAvatar name={specialist.name} className="aspect-[4/3] border-b border-ink/10" />
 
       <div className="flex flex-1 flex-col p-6">
         {specialist.profileStatus === "sample" && (
@@ -52,21 +51,5 @@ export function SpecialistCard({ specialist }: { specialist: Specialist }) {
         </div>
       </div>
     </div>
-  );
-}
-
-function PlaceholderHeadshot({ name }: { name: string }) {
-  const initials = name
-    .replace(" [VERIFY]", "")
-    .split(" ")
-    .filter((word) => word !== "Dr")
-    .slice(0, 2)
-    .map((word) => word[0])
-    .join("");
-
-  return (
-    <span className="font-display text-3xl font-bold text-bone/30" aria-hidden="true">
-      {initials || "LHC"}
-    </span>
   );
 }

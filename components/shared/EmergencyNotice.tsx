@@ -1,4 +1,5 @@
 import { emergencyNoticeLink, emergencyNoticeText } from "@/lib/site-config";
+import { AlertIcon } from "@/components/icons/Icons";
 
 type EmergencyNoticeProps = {
   className?: string;
@@ -12,8 +13,11 @@ export function EmergencyNotice({ className = "" }: EmergencyNoticeProps) {
       aria-label="Emergency guidance"
       className={`flex gap-4 border-l-4 border-oxblood bg-oxblood/5 px-5 py-4 ${className}`}
     >
-      <span aria-hidden="true" className="mono-label pt-0.5 text-xs font-semibold text-oxblood">
-        999
+      <span className="flex shrink-0 flex-col items-center gap-1 text-oxblood">
+        <AlertIcon className="h-5 w-5" aria-hidden="true" />
+        <span aria-hidden="true" className="mono-label text-xs font-semibold">
+          999
+        </span>
       </span>
       <p className="text-sm leading-6 text-ink">
         {emergencyNoticeText}{" "}

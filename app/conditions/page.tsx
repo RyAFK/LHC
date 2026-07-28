@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { conditions } from "@/lib/content/conditions";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
+import { ConditionCard } from "@/components/home/ConditionCard";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -42,18 +42,7 @@ export default function ConditionsIndexPage() {
       <Container className="py-12">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {conditions.map((condition) => (
-            <Link
-              key={condition.slug}
-              href={`/conditions/${condition.slug}`}
-              className="border border-ink/10 bg-bone px-6 py-6 transition-colors hover:border-teal/40 hover:bg-teal/5"
-            >
-              <h2 className="font-display text-lg font-semibold text-ink">
-                {condition.name}
-              </h2>
-              <p className="prose-measure mt-2 text-sm leading-6 text-ink/65">
-                {condition.overview}
-              </p>
-            </Link>
+            <ConditionCard key={condition.slug} condition={condition} headingLevel="h2" />
           ))}
         </div>
       </Container>

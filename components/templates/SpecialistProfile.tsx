@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { RelatedLinkList } from "@/components/shared/RelatedLinkList";
 import { BookingCTA } from "@/components/shared/BookingCTA";
 import { ReviewQuote, ReviewsPendingNotice } from "@/components/shared/ReviewQuote";
+import { SpecialistAvatar } from "@/components/shared/SpecialistAvatar";
 import { doctifyProfileUrl } from "@/lib/content/reviews";
 
 export function SpecialistProfile({ specialist }: { specialist: Specialist }) {
@@ -35,16 +36,7 @@ export function SpecialistProfile({ specialist }: { specialist: Specialist }) {
           )}
 
           <div className="mt-4 flex flex-col gap-6 sm:flex-row sm:items-start">
-            <div className="flex aspect-square w-28 shrink-0 items-center justify-center border border-ink/10 bg-ink-raised">
-              <span className="font-display text-2xl font-bold text-bone/30" aria-hidden="true">
-                {displayName
-                  .split(" ")
-                  .filter((w) => w !== "Dr")
-                  .slice(0, 2)
-                  .map((w) => w[0])
-                  .join("")}
-              </span>
-            </div>
+            <SpecialistAvatar name={specialist.name} className="aspect-square w-28 shrink-0 border border-ink/10" />
             <div>
               <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
                 {displayName}

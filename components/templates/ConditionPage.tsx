@@ -8,12 +8,15 @@ import { RelatedLinkList } from "@/components/shared/RelatedLinkList";
 import { SpecialistCard } from "@/components/shared/SpecialistCard";
 import { ClinicalReviewFooter } from "@/components/shared/ClinicalReviewFooter";
 import { BookingCTA } from "@/components/shared/BookingCTA";
+import { conditionIcons } from "@/components/home/conditionIcons";
+import { ActivityIcon } from "@/components/icons/Icons";
 
 export function ConditionPage({ condition }: { condition: Condition }) {
   const tests = allTests.filter((t) => condition.relevantTests.includes(t.slug));
   const specialists = allSpecialists.filter((s) =>
     condition.relevantSpecialists.includes(s.slug)
   );
+  const ConditionIcon = conditionIcons[condition.slug] ?? ActivityIcon;
 
   return (
     <article>
@@ -26,6 +29,9 @@ export function ConditionPage({ condition }: { condition: Condition }) {
               { name: condition.name, path: `/conditions/${condition.slug}` },
             ]}
           />
+          <span className="mt-4 flex h-12 w-12 items-center justify-center border border-teal/25 bg-teal/8 text-teal">
+            <ConditionIcon className="h-6 w-6" />
+          </span>
           <h1 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
             {condition.name}
           </h1>

@@ -33,6 +33,7 @@ there is no backend integration yet (see [Forms and booking](#forms-and-booking)
 - **Fonts** via `next/font/google`: Manrope (`--font-manrope`, body/interface) and Archivo (`--font-archivo`, headings), plus IBM Plex Mono (`--font-plex-mono`) reserved for real labels, timings, test codes and the hero's calibration readout — never for decorative type.
 - **Typed content** lives entirely in `lib/content/*.ts` (no CMS/MDX was introduced — the content shape is simple enough that a typed TS module is the least-dependency option; swapping in MDX or a headless CMS later just means changing these files' data source, not the components that consume them).
 - **No Framer Motion.** The spec allowed it "only where genuinely useful" — every interface transition in this build (chapter cross-fades, FAQ disclosure, focus states) is achieved with plain CSS transitions or the native `<details>` element, so the dependency was removed rather than shipped unused.
+- **Custom icon system, no icon library.** `components/icons/Icons.tsx` is a small set of hand-drawn line icons (24×24, 1.6px stroke, `currentColor`) covering symptoms, tests, pathway steps, trust-rail stats and utility actions. It exists so the site reads as designed rather than text-only, without pulling in an icon package or generic medical clip-art — every icon is a plain React SVG component.
 
 ### Directory guide
 
@@ -84,12 +85,16 @@ so it isn't mistaken for an oversight:
 The brief supplied a Higgsfield generation ID and confirmed the clip exists
 (`kling3_0_turbo`, 1280×720, 4s — resolves to ~96 frames at 24fps, matching
 the spec's frame count). It's hosted on Higgsfield's CloudFront distribution.
-This session's outbound network policy does not allow that host (confirmed
-via a direct request, which the egress proxy rejected with a policy denial —
-not a transient failure worth retrying). `ffmpeg` **is** installed in this
-environment and the extraction script below has been validated against a
-synthetic test clip, so the pipeline is proven; only the source file is
-missing.
+This session's outbound network policy does not allow that host — confirmed
+via a direct request, which the egress proxy rejected with a policy denial
+(not a transient failure). Two alternate hosts were also tried
+(`higgsfield.ai`, `api.higgsfield.ai`, in case the asset were reachable via
+the platform's own domain rather than its CDN) and both were denied with the
+same policy rejection, confirming this is a session-level egress restriction
+on arbitrary external hosts, not something specific to one URL that's worth
+routing around further. `ffmpeg` **is** installed in this environment and the
+extraction script below has been validated against a synthetic test clip, so
+the pipeline is proven; only the source file is missing.
 
 Per the brief's own instruction for this situation ("If the asset has not yet
 been added to the repository, create the full animation engine and use a
@@ -359,6 +364,12 @@ Heart Centre.**
 
 ## 13. Handover — key decisions
 
+- **Specialist headshot placeholder is a designed avatar, not a flat
+  initials box.** `components/shared/SpecialistAvatar.tsx` combines a bust
+  icon with calibration-ring linework (echoing the hero's ECG/scan-line
+  motif) and an initials badge — visually consistent with the brand, and a
+  single component so swapping in real photography later is a one-file
+  change everywhere it's used (card, profile header).
 - **Progressive enhancement over feature-detection branching** for the
   hero: rather than trying to render two different trees for "JS/motion OK"
   vs "reduced/no-JS", the component always starts in the static state (which

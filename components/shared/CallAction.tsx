@@ -2,6 +2,7 @@
 
 import { track } from "@/lib/analytics";
 import { siteConfig } from "@/lib/site-config";
+import { PhoneCallIcon } from "@/components/icons/Icons";
 
 type CallActionProps = {
   source: string;
@@ -22,7 +23,7 @@ export function CallAction({ source, variant = "text", className = "" }: CallAct
       onClick={() => track({ name: "cta_call_click", source })}
       className={`${styles} ${className}`}
     >
-      <span aria-hidden="true">☎</span>
+      <PhoneCallIcon className="h-4 w-4" />
       Call {siteConfig.telephone}
     </a>
   );
