@@ -13,7 +13,7 @@ export function SymptomCard({ symptom }: { symptom: Symptom }) {
     <Link
       href={`/symptoms/${symptom.slug}`}
       onClick={() => track({ name: "symptom_select", symptom: symptom.slug })}
-      className="group border border-ink/10 bg-bone px-6 py-6 transition-colors hover:border-teal/40 hover:bg-teal/5"
+      className="group block h-full border border-ink/10 bg-bone px-6 py-6 transition-colors hover:border-teal/40 hover:bg-teal/5"
     >
       <span className="flex h-11 w-11 items-center justify-center border border-teal/25 bg-teal/8 text-teal transition-colors group-hover:border-teal/50 group-hover:bg-teal/15">
         <SymptomIcon className="h-5 w-5" />

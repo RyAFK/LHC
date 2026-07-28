@@ -19,7 +19,7 @@ export function DiagnosticsPricing() {
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {tests.map((test, i) => (
-            <Reveal key={test.slug} delayMs={Math.min(i, 5) * 60}>
+            <Reveal key={test.slug} delayMs={Math.min(i, 5) * 90}>
               <TestCard test={test} />
             </Reveal>
           ))}

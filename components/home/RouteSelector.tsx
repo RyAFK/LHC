@@ -59,7 +59,7 @@ export function RouteSelector() {
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           {routes.map((route, i) => (
-            <Reveal key={route.id} delayMs={i * 80}>
+            <Reveal key={route.id} delayMs={i * 110}>
               <Link
                 href={route.href}
                 onClick={() => track({ name: "route_select", route: route.id })}

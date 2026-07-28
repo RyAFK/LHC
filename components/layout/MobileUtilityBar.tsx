@@ -9,7 +9,7 @@ import { PhoneCallIcon } from "@/components/icons/Icons";
 export function MobileUtilityBar() {
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-30 flex border-t border-ink/10 bg-bone pb-[env(safe-area-inset-bottom)] lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-30 flex border-t border-ink/10 bg-bone pb-[env(safe-area-inset-bottom)] [transform:translateZ(0)] [will-change:transform] lg:hidden"
       aria-label="Booking and contact"
     >
       <a

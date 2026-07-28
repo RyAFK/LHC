@@ -31,7 +31,7 @@ export function TrustRail() {
             const StatIcon = iconByLabel[stat.label] ?? ShieldCheckIcon;
             return (
               <li key={stat.label}>
-                <Reveal delayMs={i * 60} className="flex gap-3 border-l-2 border-bronze/50 pl-4">
+                <Reveal delayMs={i * 90} className="flex gap-3 border-l-2 border-bronze/50 pl-4">
                   <StatIcon className="mt-0.5 h-5 w-5 shrink-0 text-bronze" />
                   <div>
                     <p className="text-[0.95rem] leading-snug text-ink">{stat.value}</p>

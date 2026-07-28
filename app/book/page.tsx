@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { CallAction } from "@/components/shared/CallAction";
 import { InsurerPanel } from "@/components/shared/InsurerPanel";
 import { BookingRequestForm } from "@/components/templates/BookingRequestForm";
+import { Reveal } from "@/components/ui/Reveal";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -28,20 +29,23 @@ export default function BookPage() {
       <div className="border-b border-ink/10 bg-bone-dim py-10 sm:py-14">
         <Container className="max-w-3xl">
           <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Book", path: "/book" }]} />
-          <h1 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
-            Book a consultation
-          </h1>
-          <p className="prose-measure mt-4 text-base leading-7 text-ink/70">
-            No GP referral is required to book as a self-pay patient. If
-            you&rsquo;re using private medical insurance, please confirm your
-            cover with your insurer beforehand.
-          </p>
-          <div className="mt-5">
-            <CallAction source="book_page" />
-          </div>
+          <Reveal scale>
+            <h1 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
+              Book a consultation
+            </h1>
+            <p className="prose-measure mt-4 text-base leading-7 text-ink/70">
+              No GP referral is required to book as a self-pay patient. If
+              you&rsquo;re using private medical insurance, please confirm your
+              cover with your insurer beforehand.
+            </p>
+            <div className="mt-5">
+              <CallAction source="book_page" />
+            </div>
+          </Reveal>
         </Container>
       </div>
 
+      {/* Form not gated behind scroll reveal — this page's whole purpose is the form. */}
       <Container className="max-w-2xl py-12">
         <h2 className="font-display text-xl font-semibold text-ink">
           Request an appointment
@@ -52,9 +56,9 @@ export default function BookPage() {
         </p>
         <BookingRequestForm />
 
-        <div className="mt-14">
+        <Reveal className="mt-14">
           <InsurerPanel />
-        </div>
+        </Reveal>
       </Container>
     </article>
   );

@@ -21,7 +21,7 @@ export function PatientExperienceInsurers() {
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           {verifiedReviews.length > 0 ? (
             verifiedReviews.map((review, i) => (
-              <Reveal key={review.quote} delayMs={i * 80}>
+              <Reveal key={review.quote} delayMs={i * 110}>
                 <ReviewQuote review={review} />
               </Reveal>
             ))

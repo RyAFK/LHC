@@ -44,7 +44,7 @@ export function PatientPathway() {
           />
           {steps.map((s, i) => (
             <li key={s.step} className="relative">
-              <Reveal delayMs={i * 120}>
+              <Reveal delayMs={i * 150}>
                 <span className="relative z-10 flex h-[52px] w-[52px] items-center justify-center border-2 border-bronze bg-bone text-oxblood">
                   <s.Icon className="h-6 w-6" />
                 </span>

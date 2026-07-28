@@ -12,6 +12,7 @@ import { ClinicalReviewFooter } from "@/components/shared/ClinicalReviewFooter";
 import { BookingCTA } from "@/components/shared/BookingCTA";
 import { symptomIcons } from "@/components/home/symptomIcons";
 import { ActivityIcon } from "@/components/icons/Icons";
+import { Reveal } from "@/components/ui/Reveal";
 
 export function SymptomPage({ symptom }: { symptom: Symptom }) {
   const tests = allTests.filter((t) => symptom.possibleAssessments.includes(t.slug));
@@ -30,15 +31,17 @@ export function SymptomPage({ symptom }: { symptom: Symptom }) {
               { name: symptom.name, path: `/symptoms/${symptom.slug}` },
             ]}
           />
-          <span className="mt-4 flex h-12 w-12 items-center justify-center border border-teal/25 bg-teal/8 text-teal">
-            <SymptomIcon className="h-6 w-6" />
-          </span>
-          <h1 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
-            {symptom.name}
-          </h1>
-          <p className="prose-measure mt-4 text-base leading-7 text-ink/70">
-            {symptom.overview}
-          </p>
+          <Reveal scale>
+            <span className="mt-4 flex h-12 w-12 items-center justify-center border border-teal/25 bg-teal/8 text-teal">
+              <SymptomIcon className="h-6 w-6" />
+            </span>
+            <h1 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
+              {symptom.name}
+            </h1>
+            <p className="prose-measure mt-4 text-base leading-7 text-ink/70">
+              {symptom.overview}
+            </p>
+          </Reveal>
         </Container>
       </div>
 
@@ -46,71 +49,83 @@ export function SymptomPage({ symptom }: { symptom: Symptom }) {
         <EmergencyNotice />
 
         {symptom.redFlags.length > 0 && (
-          <section className="mt-10">
-            <h2 className="font-display text-xl font-semibold text-ink">
-              When symptoms need urgent attention
-            </h2>
-            <ul className="prose-measure mt-4 space-y-2 text-sm leading-6 text-ink/75">
-              {symptom.redFlags.map((flag) => (
-                <li key={flag} className="flex gap-2">
-                  <span aria-hidden="true" className="text-oxblood">·</span>
-                  {flag}
-                </li>
-              ))}
-            </ul>
-          </section>
+          <Reveal className="mt-10">
+            <section>
+              <h2 className="font-display text-xl font-semibold text-ink">
+                When symptoms need urgent attention
+              </h2>
+              <ul className="prose-measure mt-4 space-y-2 text-sm leading-6 text-ink/75">
+                {symptom.redFlags.map((flag) => (
+                  <li key={flag} className="flex gap-2">
+                    <span aria-hidden="true" className="text-oxblood">·</span>
+                    {flag}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </Reveal>
         )}
 
-        <section className="mt-10">
-          <h2 className="font-display text-xl font-semibold text-ink">
-            How London Heart Centre can help
-          </h2>
-          <p className="prose-measure mt-3 text-sm leading-6 text-ink/75">
-            {symptom.howLHCCanHelp}
-          </p>
-          <p className="prose-measure mt-3 text-xs italic text-ink/50">
-            This information does not diagnose or triage your symptoms. A
-            consultant assessment is required to understand your individual
-            situation.
-          </p>
-        </section>
+        <Reveal className="mt-10">
+          <section>
+            <h2 className="font-display text-xl font-semibold text-ink">
+              How London Heart Centre can help
+            </h2>
+            <p className="prose-measure mt-3 text-sm leading-6 text-ink/75">
+              {symptom.howLHCCanHelp}
+            </p>
+            <p className="prose-measure mt-3 text-xs italic text-ink/50">
+              This information does not diagnose or triage your symptoms. A
+              consultant assessment is required to understand your individual
+              situation.
+            </p>
+          </section>
+        </Reveal>
 
-        <section className="mt-12 grid gap-10 sm:grid-cols-2">
-          <RelatedLinkList
-            title="Possible assessments"
-            items={tests.map((t) => ({ label: t.name, href: `/tests/${t.slug}` }))}
-          />
-          <RelatedLinkList
-            title="Relevant conditions"
-            items={conditions.map((c) => ({ label: c.name, href: `/conditions/${c.slug}` }))}
-          />
-        </section>
+        <Reveal className="mt-12">
+          <section className="grid gap-10 sm:grid-cols-2">
+            <RelatedLinkList
+              title="Possible assessments"
+              items={tests.map((t) => ({ label: t.name, href: `/tests/${t.slug}` }))}
+            />
+            <RelatedLinkList
+              title="Relevant conditions"
+              items={conditions.map((c) => ({ label: c.name, href: `/conditions/${c.slug}` }))}
+            />
+          </section>
+        </Reveal>
 
         {specialists.length > 0 && (
           <section className="mt-14">
-            <h2 className="font-display text-xl font-semibold text-ink">
-              Relevant specialists
-            </h2>
+            <Reveal>
+              <h2 className="font-display text-xl font-semibold text-ink">
+                Relevant specialists
+              </h2>
+            </Reveal>
             <div className="mt-5 grid gap-6 sm:grid-cols-2">
-              {specialists.map((s) => (
-                <SpecialistCard key={s.slug} specialist={s} />
+              {specialists.map((s, i) => (
+                <Reveal key={s.slug} delayMs={Math.min(i, 4) * 100}>
+                  <SpecialistCard specialist={s} />
+                </Reveal>
               ))}
             </div>
           </section>
         )}
 
         {symptom.faqs.length > 0 && (
-          <section className="mt-14">
-            <h2 className="font-display text-xl font-semibold text-ink">FAQs</h2>
-            <div className="mt-5">
-              <FAQAccordion faqs={symptom.faqs} />
-            </div>
-          </section>
+          <Reveal className="mt-14">
+            <section>
+              <h2 className="font-display text-xl font-semibold text-ink">FAQs</h2>
+              <div className="mt-5">
+                <FAQAccordion faqs={symptom.faqs} />
+              </div>
+            </section>
+          </Reveal>
         )}
 
-        <div className="mt-14">
+        <Reveal className="mt-14">
           <BookingCTA source={`symptom_${symptom.slug}`} size="lg" />
-        </div>
+        </Reveal>
 
         <div className="mt-14">
           <ClinicalReviewFooter review={symptom.review} />

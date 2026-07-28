@@ -98,7 +98,7 @@ export function FeaturedSpecialists() {
 
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((specialist, i) => (
-            <Reveal key={specialist.slug} delayMs={Math.min(i, 5) * 70}>
+            <Reveal key={specialist.slug} delayMs={Math.min(i, 5) * 100}>
               <SpecialistCard specialist={specialist} />
             </Reveal>
           ))}
