@@ -1,14 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --color-ink: #07161b;
-  --color-ink-raised: #0d262d;
+  /* Navy + ice-blue theme (lightened from a reference clinic site the user
+     supplied): ink/ink-raised carry the same dual role they always have
+     (body text on bone + dark hero/footer surfaces), just re-hued to navy
+     instead of near-black. bone/bone-dim move from warm cream to pale
+     ice-blue. oxblood (alert/999-emergency semantics) and bronze (warm
+     accent) are deliberately left untouched. See README §13 (Handover) for
+     the exact source colours and contrast checks behind these values. */
+  --color-ink: #0a2540;
+  --color-ink-raised: #123a5e;
   --color-oxblood: #5a1f2b;
   --color-oxblood-strong: #431722;
-  --color-teal: #0e5e5c;
-  --color-teal-strong: #0a4846;
-  --color-bone: #f4f0e8;
-  --color-bone-dim: #ece5d6;
+  --color-teal: #1476b0;
+  --color-teal-strong: #0f5680;
+  --color-bone: #f0f8fa;
+  --color-bone-dim: #ddf0f4;
   --color-stone: #c8c1b5;
   --color-bronze: #aa875c;
 }

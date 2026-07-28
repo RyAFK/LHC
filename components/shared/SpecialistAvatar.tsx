@@ -45,8 +45,8 @@ export function SpecialistAvatar({ name, photo, className = "" }: SpecialistAvat
     <div className={`relative flex items-center justify-center overflow-hidden bg-ink-raised ${className}`}>
       <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full opacity-70" aria-hidden="true">
         <circle cx="100" cy="100" r="88" stroke="#AA875C" strokeWidth="0.75" fill="none" opacity="0.35" />
-        <circle cx="100" cy="100" r="62" stroke="#0E5E5C" strokeWidth="0.75" fill="none" opacity="0.4" />
-        <circle cx="100" cy="100" r="36" stroke="#F4F0E8" strokeWidth="0.5" fill="none" opacity="0.2" />
+        <circle cx="100" cy="100" r="62" stroke="#1476B0" strokeWidth="0.75" fill="none" opacity="0.4" />
+        <circle cx="100" cy="100" r="36" stroke="#F0F8FA" strokeWidth="0.5" fill="none" opacity="0.2" />
         <line x1="0" y1="100" x2="200" y2="100" stroke="#AA875C" strokeWidth="0.4" opacity="0.15" />
         <line x1="100" y1="0" x2="100" y2="200" stroke="#AA875C" strokeWidth="0.4" opacity="0.15" />
       </svg>

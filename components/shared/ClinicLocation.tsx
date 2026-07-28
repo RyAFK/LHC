@@ -48,9 +48,9 @@ export function ClinicLocation() {
           <line x1="0" y1="200" x2="400" y2="200" stroke="#AA875C" strokeWidth="0.5" opacity="0.4" />
           <line x1="100" y1="0" x2="100" y2="260" stroke="#AA875C" strokeWidth="0.5" opacity="0.25" />
           <line x1="300" y1="0" x2="300" y2="260" stroke="#AA875C" strokeWidth="0.5" opacity="0.25" />
-          <circle cx="200" cy="130" r="6" fill="#F4F0E8" />
-          <circle cx="200" cy="130" r="14" stroke="#F4F0E8" strokeWidth="1" fill="none" />
-          <circle cx="200" cy="130" r="26" stroke="#0E5E5C" strokeWidth="1" fill="none" opacity="0.7" />
+          <circle cx="200" cy="130" r="6" fill="#F0F8FA" />
+          <circle cx="200" cy="130" r="14" stroke="#F0F8FA" strokeWidth="1" fill="none" />
+          <circle cx="200" cy="130" r="26" stroke="#1476B0" strokeWidth="1" fill="none" opacity="0.7" />
         </svg>
         <span className="mono-label absolute bottom-4 left-4 text-[0.65rem] text-stone">
           W1G 6NB

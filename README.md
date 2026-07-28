@@ -401,8 +401,9 @@ Heart Centre.**
       (`ClinicalReviewFooter`): reviewer name is a `[VERIFY]` placeholder;
       needs a real named clinical reviewer, and the NHS/BHF source links
       should be checked for currency.
-- [ ] **Hero video asset**: not present in the repo — see §4 for exactly
-      what's needed to complete it.
+- [ ] **Scroll-scrubbed hero chapter footage**: not present in the repo —
+      see §4b for exactly what's needed to complete it. (The separate
+      ambient hero loop in §4a is done, using a real supplied asset.)
 - [ ] **Shopify redirect map** (`lib/redirects.ts`): currently empty —
       needs the real old-site URL list.
 - [ ] **Production domain** (`lib/site-config.ts` → `siteConfig.url`): set to
@@ -462,6 +463,44 @@ Heart Centre.**
   check in the final QA pass), and every test's price is either a real
   `£X` or the literal string "Price confirmed after assessment" — the
   `PriceSummary` component has no code path that can render `£0`.
+- **Palette reskin (navy + ice-blue, lighter tones)** — the user supplied a
+  screenshot of a different clinic's site for colour reference. Sampled its
+  exact colours by pixel (`ink`-equivalent navy `#133453`, headline navy
+  `#002245`, pale section background `#DDF0F4`) and used them to redefine
+  the semantic tokens in `app/globals.css` rather than reskin components
+  individually — `ink`/`ink-raised` moved from near-black to a lighter navy
+  (`#0A2540`/`#123A5E`), `bone`/`bone-dim` moved from warm cream to pale
+  ice-blue (`#F0F8FA`/`#DDF0F4`), and `teal` was re-hued from a dark
+  teal-green to a clear action-blue (`#1476B0`/`#0F5680`) so the one
+  interactive accent colour actually belongs to the same family as the new
+  navy/ice-blue surfaces. **Deliberately left unchanged**: `oxblood` (the
+  999/emergency-notice and form-error colour — muting a safety-critical
+  alert colour toward blue would make it read as less urgent, which the
+  brief's own clinical-safety rules argue against) and `bronze` (a warm
+  accent used ~30 places for eyebrows/underlines, which pairs fine with
+  navy and keeps the palette from going flat monochrome). Before landing on
+  the new `ink` value, checked WCAG contrast at every opacity level already
+  in use (`text-ink/40` through `/80`, since ~200+ call sites rely on
+  translucent ink over `bone`) against the new `bone`, confirming parity
+  with (not a regression from) what the previous near-black `ink` shipped
+  with. A few components render decorative SVG strokes/fills with literal
+  hex rather than Tailwind classes (`opengraph-image.tsx`,
+  `SpecialistAvatar.tsx`'s placeholder rings, `ClinicLocation.tsx`'s locator
+  graphic) — those were updated by hand to the same new hex values since
+  they can't consume CSS custom properties.
+- **Hero loop camera "shake" was a real `zoompan` artifact, not a false
+  alarm.** The source keyframes are 1672×941 and the zoom range is only
+  1.5–3%, so `zoompan`'s per-frame integer crop math had less than one
+  source pixel of headroom between frames — it rounds to the same or an
+  adjacent pixel unpredictably, which reads as a vibrating camera rather
+  than a smooth push. Confirmed by diffing consecutive extracted frames
+  (a genuine jitter shows as a wildly uneven diff sequence, e.g. 1.07 then
+  0.02 then back up, versus a smooth push's steadily-scaled diffs) before
+  concluding it was real. Fixed by inserting a `scale=6688:3764:flags=lanczos`
+  (4x) supersample ahead of every `zoompan` call, giving the crop math
+  sub-pixel headroom once downscaled to the 1600×900 output — re-checked
+  the same consecutive-frame diff afterward (now a steady, non-alternating
+  sequence) and re-verified the loop seam is still clean.
 - **How the real specialist data got in**: this session couldn't fetch
   `londonheartcentre.com` directly (`WebFetch` was blocked for every URL
   tried in this session, including neutral test pages — a session-level
