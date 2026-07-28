@@ -67,7 +67,7 @@ export function MobileNav() {
         aria-hidden={!open}
         inert={!open}
         className={`fixed inset-0 z-50 flex flex-col bg-ink text-bone ${
-          reducedMotion ? "" : "transition-[clip-path] duration-500 ease-[cubic-bezier(.22,1,.36,1)]"
+          reducedMotion ? "" : "transition-[clip-path] duration-[900ms] ease-[cubic-bezier(.22,1,.36,1)]"
         } ${open ? "[clip-path:inset(0_0_0%_0)]" : "[clip-path:inset(0_0_100%_0)]"}`}
       >
         <div className="flex items-center justify-between border-b border-bone/10 px-5 py-4">
