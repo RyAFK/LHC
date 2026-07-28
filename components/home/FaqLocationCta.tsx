@@ -44,7 +44,7 @@ export function FaqLocationCta() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <BookingCTA source="homepage_final_cta" size="lg" />
-            <CallAction source="homepage_final_cta" variant="button" className="border-bone/25 text-bone hover:border-bone/50 hover:bg-bone/10" />
+            <CallAction source="homepage_final_cta" variant="button-on-dark" />
           </div>
         </Container>
       </section>

@@ -86,7 +86,7 @@ export function MobileNav() {
 
           <div className="flex flex-col gap-3 border-t border-bone/10 px-5 py-5">
             <BookingCTA source="mobile_nav" variant="on-dark" size="lg" className="w-full" />
-            <CallAction source="mobile_nav" variant="button" className="w-full border-bone/25 text-bone hover:border-bone/50 hover:bg-bone/10" />
+            <CallAction source="mobile_nav" variant="button-on-dark" className="w-full" />
           </div>
         </div>
       )}

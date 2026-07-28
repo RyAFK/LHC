@@ -38,7 +38,7 @@ export function HeroIntro() {
           </a>
         </div>
         <div className="mt-5">
-          <CallAction source="hero_utility" className="text-bone hover:text-stone" />
+          <CallAction source="hero_utility" variant="button-on-dark" />
         </div>
       </div>
     </div>
