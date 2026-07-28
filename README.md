@@ -82,8 +82,48 @@ obvious home.
 
 ## 4. The animated hero — current asset status
 
-**The hero video has not been added to this repository.** Here's exactly why,
-so it isn't mistaken for an oversight:
+### 4a. The ambient hero loop (`HeroIntro`'s backdrop) — done, real asset
+
+`HeroIntro`'s backdrop (the always-visible, static-in-flow section with the
+real H1) now plays a real 10-second seamless ambient loop, built from a media
+pack the user supplied directly (six PNG keyframes — consultant's eye/ECG →
+echocardiogram → anatomical heart → coronary lumen → iris again → back to the
+opening frame — plus a written creative brief specifying timing, easing and
+loop requirements).
+
+- **Encoding**: each keyframe becomes its own short clip via `ffmpeg`'s
+  `zoompan` filter (a slow, near-imperceptible push/pull, 1.5–3% scale change
+  per the brief, never more), chained together with `xfade` crossfades
+  (`circleopen`/`circleclose` for the two eye↔scan match-dissolves, `fade`
+  elsewhere), 1.0s each — long enough that nothing reads as a flash or hard
+  cut. Total output is trimmed to exactly 10.000s.
+- **Seamless loop, verified**: the final segment is a static hold on the
+  opening frame at the same zoom level the loop starts at (no cumulative
+  scale/position drift), and the encoded first/last frame were diffed
+  pixel-by-pixel (mean channel difference ~1/255 — compression noise, not a
+  visible seam) before this was considered done.
+- **Assets**: `public/media/hero-loop/hero-loop.mp4` (H.264, ~3.4MB),
+  `hero-loop.webm` (VP9, ~1.1MB), `hero-loop-poster.webp` (first-frame
+  poster/reduced-motion fallback, 1600×900).
+- **Component** (`components/hero/HeroLoop.tsx`): `<video>` with
+  `autoplay muted loop playsInline preload="auto"`, WebM source before MP4.
+  An `IntersectionObserver` pauses playback once the hero scrolls out of
+  view. `usePrefersReducedMotion` swaps the whole thing for the static poster
+  `<img>` with no video element in the DOM at all. A left-to-right dark
+  gradient sits between the video and the copy so the white H1 stays
+  readable without a heavy overlay flattening the imagery; on mobile the
+  video's `object-position` is weighted right (~85%) so the narrower crop
+  doesn't cut into the eye/heart focal point, matching the brief's
+  responsive-behaviour section.
+
+This is a separate concern from the 96-frame scroll-scrubbed chapter sequence
+described below (`HeroSequence`) — that engine is still waiting on real
+footage; nothing about the ambient loop above changes that.
+
+### 4b. The scroll-scrubbed chapter sequence (`HeroSequence`) — still a placeholder
+
+**The scroll-scrubbed hero video has not been added to this repository.**
+Here's exactly why, so it isn't mistaken for an oversight:
 
 The brief supplied a Higgsfield generation ID and confirmed the clip exists
 (`kling3_0_turbo`, 1280×720, 4s — resolves to ~96 frames at 24fps, matching
@@ -203,9 +243,11 @@ overlay and the static fallback stack — one source of truth for the copy.
 
 ## 7. Performance notes
 
-- **LCP**: the hero's H1 and its backdrop are plain server-rendered HTML/SVG
-  (`HeroIntro` + `HeroPosterBackdrop`) — no canvas, no JS, no waiting on any
-  frame fetch. This is the LCP candidate and is fully static.
+- **LCP**: the hero's H1 is plain server-rendered HTML and is the LCP
+  candidate; it never waits on the video. The ambient loop's `<video poster>`
+  displays the poster image immediately while the (already-preloading) video
+  buffers in, and reduced-motion visitors get a plain `<img>` instead of a
+  video element at all.
 - **The frame sequence never blocks first paint.** `HeroSequence` renders
   the static chapter stack synchronously; frame loading only starts in a
   `useEffect` after mount, and only if motion is allowed.
